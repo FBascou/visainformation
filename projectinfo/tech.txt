@@ -1,0 +1,38 @@
+STACK: 
++ Frontend: 
+-- Typescript
+-- Astro vanilla TS
+-- CSS
++ Lints: 
+-- ESLint
+-- Prettier
++ Backend: 
+-- Node
+-- Express or NestJS
++ Database: https://turso.tech/ https://docs.astro.build/en/guides/backend/turso/
++ Design: Figma
++ Version Control: Git
++ Repository Host: Github
++ Website Hosting: 
++ Cloud Storage: Google Drive
+
+DB: 
+https://www.reddit.com/r/node/comments/dfmrlj/when_should_i_consider_a_database_instead_of/
+SQLite + Sequelize
+https://www.reddit.com/r/nextjs/comments/1ct3hoa/where_should_i_put_a_large_json_file_that_the/
+
+https://stackoverflow.com/questions/54579186/is-json-acceptable-for-storing-accessing-static-data
+
+https://joshzeigler.com/technology/web-development/how-big-is-too-big-for-json
+
+One problem - having too many large json files with data could slow down performance
+
+IMPORTANT!!!!!!!
+Keeping all the countries with their visa information will be a large file, 
+the json file could reach like 10MB+
+WE NEED TO CHANGE THIS
+or Astrojs/db
+
+Sitemap: 
+https://docs.astro.build/en/guides/integrations-guide/sitemap/
+

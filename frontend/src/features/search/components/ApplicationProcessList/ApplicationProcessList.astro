@@ -1,0 +1,96 @@
+---
+import ApplicationProcessItem from "../ApplicationProcessItem/ApplicationProcessItem.astro";
+
+type List = {
+  id: number;
+  title: string;
+  body: string;
+  url: string;
+  urlTitle: string;
+  additionalInfo: string;
+};
+
+const testList: List[] = [
+  {
+    id: 1,
+    title: "Step A",
+    body: "Go to the website of the Ministry of Foreign Affairs of Canada, where you can find the online application.",
+    url: "www.sadasdas.com",
+    urlTitle: "Canada Website Online Application",
+    additionalInfo: "Please double check for the visa requirements.",
+  },
+  {
+    id: 2,
+    title: "Step B",
+    body: "Go to the website of the Ministry of Foreign Affairs of Canada, where you can find the online application.",
+    url: "www.sadasdas.com",
+    urlTitle: "Canada Website Online Application",
+    additionalInfo: "Please double check for the visa requirements.",
+  },
+  {
+    id: 3,
+    title: "Step C",
+    body: "Go to the website of the Ministry of Foreign Affairs of Canada, where you can find the online application.",
+    url: "www.sadasdas.com",
+    urlTitle: "Canada Website Online Application",
+    additionalInfo: "Please double check for the visa requirements.",
+  },
+  {
+    id: 4,
+    title: "Step D",
+    body: "Go to the website of the Ministry of Foreign Affairs of Canada, where you can find the online application.",
+    url: "www.sadasdas.com",
+    urlTitle: "Canada Website Online Application",
+    additionalInfo: "Please double check for the visa requirements.",
+  },
+  {
+    id: 6,
+    title: "Step E",
+    body: "Go to the website of the Ministry of Foreign Affairs of Canada, where you can find the online application.",
+    url: "www.sadasdas.com",
+    urlTitle: "Canada Website Online Application",
+    additionalInfo: "Please double check for the visa requirements.",
+  },
+];
+---
+
+<section>
+  <h2>Application Process</h2>
+  <div>
+    <ul class="application-process-list-container">
+      {
+        testList.map((item) => (
+          <li>
+            <ApplicationProcessItem {...item} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .application-process-list-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    li:not(:last-child)::after {
+      content: "→";
+      font-size: 1.5rem;
+      color: var(--clr-tertiary);
+    }
+
+    li:last-child::after {
+      content: "     ";
+      color: var(--clr-tertiary);
+    }
+  }
+</style>

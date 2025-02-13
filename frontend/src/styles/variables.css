@@ -1,0 +1,49 @@
+:root {
+  /* Font Families */
+  /* "Segoe UI Adjusted",
+  "Segoe UI", */
+  --font: -apple-system, BlinkMacSystemFont, "Liberation Sans", sans-serif;
+
+  /* Font Weights */
+
+  /* Font Sizes */
+  --h1: clamp(2rem, 1.8rem + 1vw, 3rem);
+  --h2: clamp(1.5rem, 1.5rem + 0.375vw, 2rem);
+  --h3: clamp(1.25rem, 1.175rem + 0.375vw, 1.5rem);
+  --h4: 12;
+  --h5: 12;
+  --h6: 12;
+  --p: clamp(1rem, 0.98rem + 0.1vw, 1.1rem);
+  --p-error: 1rem;
+  --p-success: 1rem;
+  --p-hover: 1.2rem;
+
+  /* Font Colors */
+  --clr-primary: rgb(0, 0, 0, 1);
+  --clr-secondary: rgb(255, 255, 255, 1);
+  --clr-tertiary: rgb(117, 117, 117);
+  --clr-accent: rgb(24, 114, 204, 1);
+  --clr-success: rgb(24, 114, 204, 1);
+  --clr-error: rgb(255, 0, 0, 1);
+
+  /* Background Colors */
+  --bg-primary: rgb(255, 255, 255, 1);
+  --bg-tertiary: rgb(211, 211, 211, 1);
+  --bg-accent: var(--clr-accent);
+  --bg-accent-hover: rgb(18, 90, 161);
+
+  /* Borders and BoxShadows */
+  --border-clr-primary: var(--bg-tertiary);
+  --border-clr-focus: var(--clr-primary);
+  --border-clr-success: var(--clr-success);
+  --border-clr-error: var(--clr-error);
+  --border-size: 2px;
+  --border: var(--border-size) solid var(--border-clr-primary);
+  --border-focus: var(--border-size) solid var(--border-clr-focus);
+  --border-success: var(--border-size) solid var(--border-clr-success);
+  --border-error: var(--border-size) solid var(--border-clr-error);
+  --box-shadow: 0 0 3px 0 rgb(0, 0, 0, 0.25);
+
+  /* Paddings */
+  --p-layout-inline: calc(2rem + 1.5625vw);
+}

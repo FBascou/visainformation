@@ -1,0 +1,92 @@
+---
+import Layout from "@layouts/Layout.astro";
+import FormVisaSearch from "@features/search/components/FormVisaSearch/FormVisaSearch.astro";
+import TableAccordion from "@features/search/components/TableAccordion/TableAccordion.astro";
+import VisaInformation from "@features/search/components/VisaInformation/VisaInformation.astro";
+import { getFilteredVisaList } from "@features/search/queries/queries";
+
+const { searchParams } = Astro.url;
+const passportCountry = searchParams.get("passportCountry") || "";
+const destinationCountry = searchParams.get("destinationCountry") || "";
+const travelReason = searchParams.get("travelReason") || "";
+const visaId = searchParams.get("visaId") || "";
+const tableHeaders = [
+  "Visa",
+  "Visa Code",
+  "Duration",
+  "Number of Entries",
+  "Visa Required",
+  "Requirements",
+];
+
+const filteredVisaList = await getFilteredVisaList(
+  destinationCountry,
+  passportCountry,
+  travelReason
+);
+
+const filteredVisa = filteredVisaList.find(({ Visa }) => Visa.id === Number(visaId));
+
+// In the future, compare country codes instead of names "AU", "AR", etc, compare perfromance between arr of obj with country codes or just a list of country names
+// MAYBE: remove the name="visa" from the details, so people can open all details together, instead of opening one and closing all others
+// TODO: Remove FormCountrySearch and add FormVisaSearch to countries,
+// Overview: specify if you can get the visa on arrival, online, embassy on your country or abroad
+// Overview: move to general components
+// is it more performant to get passportCountry, destinationCountry, and travelReason from url or as prop?
+// WTF is VisaCountryRejectionList - It should be a list of countries that are banned from entering another country
+// IMPORTANT: Should I name visa type: Short Stay and Long Stay and categories: tourism, work, etc. Or add the stays in as categories.
+// But many have short stay/long stay as their visa names.
+---
+
+<Layout title="Search">
+  <div class="search-container">
+    <h1>Find Your Visa</h1>
+    <section>
+      <FormVisaSearch
+        title={null}
+        passportCountry={passportCountry}
+        destinationCountry={destinationCountry}
+        travelReason={travelReason}
+        buttonText="Search Visa"
+      />
+    </section>
+    <section>
+      {
+        visaId === "" ? (
+          <TableAccordion
+            tableHeaders={tableHeaders}
+            tableBody={filteredVisaList}
+            passportCountry={passportCountry}
+          />
+        ) : (
+          <VisaInformation
+            visa={filteredVisa}
+            passportCountry={passportCountry}
+            destinationCountry={destinationCountry}
+            travelReason={travelReason}
+          />
+        )
+      }
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .search-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+
+    section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      /* align-items: center;
+      justify-content: center; */
+      gap: 3rem;
+    }
+  }
+</style>

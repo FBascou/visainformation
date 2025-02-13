@@ -1,0 +1,118 @@
+---
+import CardImportantMessage from "@components/CardImportantMessage/CardImportantMessage.astro";
+import OverviewList from "@features/search/components/OverviewList/OverviewList.astro";
+import ApplicationProcessList from "../ApplicationProcessList/ApplicationProcessList.astro";
+
+interface Props {
+  visa: Object; // get type
+  passportCountry: string;
+  destinationCountry: string;
+  travelReason: string;
+}
+
+type OverviewItemType = {
+  label: string;
+  value: undefined | string | number;
+};
+
+const { visa, passportCountry, destinationCountry, travelReason } = Astro.props;
+
+const isVisaRequired = visa?.VisaCountryExemptionList?.name === passportCountry;
+
+const overviewList: OverviewItemType[] = [
+  { label: "name", value: visa?.Visa.name },
+  { label: "code", value: visa?.Visa.code },
+  { label: "type", value: visa?.Visa.type },
+  {
+    label: "duration / validity",
+    value: `${visa?.Visa.duration} / ${visa?.Visa.validity}`,
+  },
+  { label: "number of entries", value: visa?.Visa.numberOfEntries },
+];
+
+const importantMessage = `<p>
+  If you hold a passport from <span>${passportCountry}</span> 
+  you do ${isVisaRequired === true ? "not" : ""} 
+  need the <span>${visa?.Visa.name}</span> 
+  visa to enter <span>${destinationCountry}</span> 
+  for <span>${travelReason}</span>
+</p>`;
+---
+
+<section class="visa-information-container">
+  <h2>Visa {visa?.Visa.name}</h2>
+  <!-- <h2>Visa Overview: {visa?.Visa.name}</h2> -->
+  {!visa?.Visa.description ? null : <p>{visa.Visa.description}</p>}
+  <CardImportantMessage message={importantMessage} />
+  <OverviewList list={overviewList} />
+  <section>
+    <h2>Requirements</h2>
+    <div class="requirements-container">
+      <ul>
+        <li>Application Form: {visa?.VisaRequirement?.applicationFormName}</li>
+        <li>
+          Application Form Code: {visa?.VisaRequirement?.applicationFormCode}
+        </li>
+        <li>Application URL: {visa?.VisaRequirement?.applicationFormUrl}</li>
+        <li>Document Required: {visa?.VisaRequirement?.documentType}</li>
+        <li>Document validity: {visa?.VisaRequirement?.documentValidity}</li>
+        <li>
+          Document Photocopies: {visa?.VisaRequirement?.documentPhotocopyQuantity}
+        </li>
+        <li>
+          Visa Price ({visa?.VisaRequirement?.feeLocalCurrency}): {visa?.VisaRequirement?.feeLocal}
+        </li>
+        <li>Visa Price (USD): {visa?.VisaRequirement?.feeUsd}</li>
+      </ul>
+    </div>
+  </section>
+  <ApplicationProcessList />
+  <section>
+    <h2>Contact</h2>
+    <h3>In {passportCountry}</h3>
+    <!-- <address>
+      <a href="mailto:jim@example.com">jim@example.com</a><br />
+      <a href="tel:+14155550132">+1 (415) 555‑0132</a>
+    </address> -->
+
+    <!-- <ul>
+    {filteredCountry?.diplomaticMission?.passportCountry?.map((mission) => 
+    <li>{mission.name}</li>          
+    <li>Address: {mission.fullAddress}</li>          
+    <li>Phone: {mission.phoneMain}</li>          
+    <li>Emergency Phone:{mission.phoneEmergency}</li>          
+    <li>Email: {mission.email}</li>     
+  )}
+  </ul> -->
+    <h3>In {destinationCountry}</h3>
+    <!-- <ul>
+  {filteredCountry?.diplomaticMission?.destinationCountry?.map((mission) => 
+    <li>{mission.name}</li>          
+    <li>Address: {mission.fullAddress}</li>          
+    <li>Phone: {mission.phoneMain}</li>          
+    <li>Emergency Phone:{mission.phoneEmergency}</li>          
+    <li>Email: {mission.email}</li>     
+  )}
+  </ul> -->
+  </section>
+  <section><h2>News</h2></section>
+</section>
+
+<style>
+  .visa-information-container {
+    & section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 3rem;
+      border-top: 2px solid var(--border-primary);
+      padding-top: 3rem;
+      & ul li {
+        list-style-type: disc;
+        list-style-position: inside;
+      }
+    }
+  }
+</style>

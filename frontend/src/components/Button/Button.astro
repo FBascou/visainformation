@@ -1,0 +1,57 @@
+---
+interface Props {
+  type?: "submit" | "reset" | "button" | null | undefined;
+  className?: string | null | undefined;
+  disabled?: boolean;
+  text: string;
+}
+
+const { type = "submit", className, disabled, text } = Astro.props;
+---
+
+<button type={type} class={className} disabled={disabled}>
+  {text}
+</button>
+
+<style>
+  button {
+    padding: 1rem;
+    font-size: var(--p);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .button-primary {
+    box-shadow: var(--box-shadow);
+    background-color: var(--clr-accent);
+    color: var(--clr-secondary);
+  }
+
+  .button-secondary {
+    box-shadow: var(--box-shadow);
+    background-color: var(--bg-secondary);
+    color: var(--clr-accent);
+  }
+
+  .button-tertiary {
+    background-color: var(--bg-secondary);
+    color: var(--clr-accent);
+  }
+
+  button:hover {
+    /* scale: 0.95; */
+    background-color: var(--bg-accent-hover);
+    transition: 0.5s;
+  }
+
+  button:focus {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+
+  button:disabled {
+    background-color: var(--bg-tertiary);
+    color: var(--clr-primary);
+    cursor: not-allowed;
+  }
+</style>

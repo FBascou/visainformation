@@ -1,0 +1,224 @@
+---
+import Button from "@components/Button/Button.astro";
+import dataCountries from "@utilities/data/dataCountries.json";
+import dataTravelReasons from "@utilities/data/dataTravelReasons.json";
+//https://stackoverflow.com/questions/22292822/how-to-style-select-dropdown-only-when-value-is-empty
+
+interface Props {
+  title: null | string;
+  passportCountry?: string;
+  destinationCountry?: string;
+  travelReason?: string;
+  buttonText: string;
+}
+
+const { title, passportCountry, destinationCountry, travelReason, buttonText } = Astro.props;
+
+// In the future, compare country codes instead of names "AU", "AR", etc
+---
+
+<search>
+  <!-- Remove the title?? -->
+  {title === null ? null : <h2>{title}</h2>}
+  <form action={"/search"}>
+    <div class="form-group">
+      <label for="passportCountry">Your passport's origin</label>
+      <select name="passportCountry" id="passportCountry">
+        <option value=""></option>
+        {
+          dataCountries.map((country) => (
+            <option value={country} selected={country === passportCountry ? true : false}>
+              {country}
+            </option>
+          ))
+        }
+      </select>
+      <p class="message-error" id="passportCountryError"></p>
+    </div>
+    <div class="form-group">
+      <label for="destinationCountry">Your destination</label>
+      <select name="destinationCountry" id="destinationCountry">
+        <option value=""></option>
+        {
+          dataCountries.map((country) => (
+            <option value={country} selected={country === destinationCountry ? true : false}>
+              {country}
+            </option>
+          ))
+        }
+      </select>
+      <p class="message-error" id="destinationCountryError"></p>
+    </div>
+    <div class="form-group">
+      <label for="travelReason">Travel reason</label>
+      <select name="travelReason" id="travelReason">
+        <option value=""></option>
+        {
+          dataTravelReasons.map((reason) => (
+            <option value={reason} selected={reason === travelReason ? true : false}>
+              {reason}
+            </option>
+          ))
+        }
+      </select>
+      <p class="message-error" id="travelReasonError"></p>
+    </div>
+    <div class="form-group">
+      <Button className="button-primary" disabled={true} text={buttonText} />
+    </div>
+  </form>
+</search>
+
+<script>
+  import { z } from "astro:schema";
+
+  const form = document.querySelector("form");
+  const inputs = document.querySelectorAll("input, select, textarea");
+  const submitButton = document.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  let formValues: Record<string, string> = {};
+
+  const SearchVisaSchema = z.object({
+    passportCountry: z
+      .string({ required_error: "Passport country is required" })
+      .min(1, { message: "Passport country cannot be empty" }),
+    destinationCountry: z
+      .string({ required_error: "Destination country is required" })
+      .min(1, { message: "Destination country cannot be empty" }),
+    travelReason: z
+      .string({ required_error: "Travel reason is required" })
+      .min(1, { message: "Travel reason cannot be empty" }),
+  });
+
+  type SearchVisaSchemaFlattenedErrorsType =
+    | z.inferFlattenedErrors<typeof SearchVisaSchema, { message: string; errorCode: string }>
+    | { fieldErrors?: Record<string, string[]> };
+
+  const formValidity = SearchVisaSchema.safeParse(formValues);
+  const errors: SearchVisaSchemaFlattenedErrorsType = formValidity.success
+    ? {}
+    : formValidity.error.flatten();
+
+  form?.addEventListener(
+    "change",
+    (event: Event) => {
+      const input = event.target as HTMLSelectElement | HTMLInputElement;
+      const errorMessage = document.getElementById(`${input?.name}Error`) as HTMLSpanElement;
+      if (!input.value) {
+        input.style.borderBottom = "var(--border-error)";
+        if (errors?.fieldErrors?.[input.name]) {
+          errorMessage.textContent = errors?.fieldErrors?.[input.name]?.[0] ?? null;
+        } else {
+          errorMessage.textContent = "";
+        }
+      } else {
+        input.style.borderBottom = "var(--border-success)";
+        errorMessage.textContent = "";
+      }
+    },
+    true
+  );
+
+  form?.addEventListener("change", () => {
+    inputs?.forEach((element) => {
+      if (
+        element instanceof HTMLFormElement ||
+        element instanceof HTMLInputElement ||
+        element instanceof HTMLSelectElement ||
+        element instanceof HTMLTextAreaElement
+      ) {
+        if (element.name) {
+          formValues[element.name] = element.value;
+        }
+      }
+    });
+
+    const formValidity = SearchVisaSchema.safeParse(formValues);
+
+    if (formValidity.success) {
+      submitButton.disabled = false;
+    } else {
+      submitButton.disabled = true;
+    }
+  });
+</script>
+
+<style>
+  /* user-valid https://www.youtube.com/watch?v=awNYtIAu6pI */
+  search {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    h2 {
+      text-align: center;
+    }
+
+    & form {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+
+      & h2 {
+        text-align: center;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        height: 100%;
+        max-width: 100%; /* fix this? */
+        flex: 1 auto; /* fix this? */
+
+        & select {
+          padding: 0.4rem;
+          border: none;
+          border-bottom: var(--border);
+          font-size: var(--p);
+          text-transform: capitalize;
+          transition: 0.3s;
+
+          /* &:valid {
+            border-bottom: 2px solid var(--border-success);
+          } */
+
+          &:user-valid {
+            border-bottom: var(--border-success);
+          }
+
+          &:user-invalid {
+            border-bottom: var(--border-error);
+          }
+        }
+
+        & select:focus {
+          border-bottom: var(--border-focus);
+        }
+
+        & select:focus label {
+          color: var(--clr-primary);
+        }
+
+        /* 
+        & select:invalid {
+          border-bottom: 2px solid gray;
+        }
+
+        & select > option {
+          border-bottom: 2px solid var(--border-focus);
+        }
+
+        & select option[value=""],
+        select option:not([value]) {
+          border-bottom: 2px solid gray;
+        } */
+      }
+    }
+  }
+</style>

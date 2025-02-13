@@ -1,0 +1,22 @@
+---
+interface Props {
+  message: string;
+}
+
+const { message } = Astro.props;
+---
+
+<section class="card-important-message-container">
+  <Fragment set:html={message} />
+</section>
+
+<style>
+  .card-important-message-container {
+    width: 100%;
+    border: 2px solid var(--clr-accent);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

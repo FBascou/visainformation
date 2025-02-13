@@ -1,0 +1,47 @@
+---
+import Header from "../components/Header/Header.astro";
+import "../styles/reset.css";
+import "../styles/main.css";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+// HEADER: Add a section so when you tab you skip the navbar and go to main
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <link rel="stylesheet" href="/frontend/src/styles/main.css" /> -->
+    <title>VisaInfo - {title}</title>
+  </head>
+  <body>
+    <div class="layout-container">
+      <Header />
+      <main>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  .layout-container {
+    max-width: 1920px;
+    margin: 0 auto;
+
+    main {
+      width: 100%;
+      padding-block: 5rem 2rem;
+      padding-inline: var(--p-layout-inline);
+    }
+  }
+</style>

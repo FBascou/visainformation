@@ -1,0 +1,121 @@
+[
+  {
+    "visaTypes": [
+      "Tourist",
+      "Work",
+      "Business",
+      "Exit",
+      "Diplomatic",
+      "Official",
+      "Crew",
+      "Transit",
+      "Visit",
+      "Residence",
+      "Refugee/Asylum",
+      "Retirement",
+      "Remote",
+      "Working Holiday Visa",
+      "Work & Holiday",
+      "Digital Nomad",
+      "Scientific, Cultural, Sports, & Humanitarian Reasons",
+      "Medical",
+      "Family Reunification",
+      "Humanitarian or Religious Activities",
+      "Investment",
+      "Pilgrimage",
+      "Study???"
+    ]
+  },
+  {
+    "visaApplicationMethod": [
+      "Stamped or In-Person (Consulate or Embassy)",
+      "Online (E-Visa)",
+      "Visa on Arrival",
+      "Through an Agency"
+    ]
+  },
+  {
+    "visaDuration": [
+      "24 Hours",
+      "48 Hours",
+      "72 Hours",
+      "30 Days",
+      "90 Days",
+      "90 Days Within 180 Days",
+      "6 Months",
+      "1 Year",
+      "2 Years"
+    ]
+  },
+  {
+    "documentRequired": ["National ID Card", "Passport"]
+  },
+  {
+    "passportValidity": ["3 Months", "6 Months", "1 Year"]
+  },
+  {
+    "multipleEntries": ["0", "1", "2", "Multiple", "1, 2, or Multiple"]
+  },
+  {
+    "vaccines": [
+      "COVID-19",
+      "Mumps",
+      "Measles",
+      "Rubella",
+      "Polio",
+      "Tetanus & Diphtheria",
+      "Pertussis",
+      "Haemophilus Influenzae Type B (Hib)",
+      "Hepatitis A",
+      "Hepatitis B",
+      "Rotavirus",
+      "Meningococcal",
+      "Varicella",
+      "Pneumococcal",
+      "Seasonal Influenza"
+    ]
+  },
+  {
+    "visaRejectionReason": [
+      "-- CHANGE OR RE-WRITE THESE OPTIONS TO AVOID COPYRIGHT ISSUES/CLAIMS --",
+      "Uncompleted documents.",
+      "False information.",
+      "Not attending your visa appointment on time.",
+      "When your information on the requested documents does not combine with the answer to questions in the interview."
+    ]
+  },
+  {
+    "visaProcessSteps": [
+      {
+        "online": [
+          "Register/Login",
+          "Complete the online application form",
+          "Pay the corresponding visa fee",
+          "Wait for a confirmation email",
+          "Wait for the visa",
+          "Pick up your visa"
+        ]
+      },
+      {
+        "offline": [
+          "Register/Login",
+          "Complete the online application form",
+          "Pay the corresponding visa fee",
+          "Wait for a confirmation email",
+          "Wait for the visa",
+          "Pick up your visa"
+        ]
+      },
+      {
+        "onArrival": [
+          "Register/Login",
+          "Complete the online application form",
+          "Pay the corresponding visa fee",
+          "Wait for a confirmation email",
+          "Wait for the visa",
+          "Pick up your visa"
+        ]
+      }
+    ]
+  }
+]

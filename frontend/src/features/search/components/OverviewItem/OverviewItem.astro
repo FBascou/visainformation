@@ -1,0 +1,30 @@
+---
+type Props = {
+  label: string;
+  value: string | number;
+};
+
+const { label, value } = Astro.props;
+---
+
+<li class="overview-item-container">
+  <p class="label">{label}</p>
+  <p>{value}</p>
+</li>
+
+<style>
+  .overview-item-container {
+    width: 100%;
+    height: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* flex: 1; */
+    gap: 1rem;
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+  }
+</style>

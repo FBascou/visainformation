@@ -1,0 +1,102 @@
+---
+import Button from "@components/Button/Button.astro";
+import dataCountries from "@utilities/data/dataCountries.json";
+
+interface Props {
+  title: null | string;
+  destinationCountry?: string;
+  buttonText: string;
+}
+
+const { title, destinationCountry, buttonText } = Astro.props;
+---
+
+<search>
+  {title === null ? null : <h2>{title}</h2>}
+  <form action="/countries">
+    <div class="form-group">
+      <label for="destinationCountry">Your destination</label>
+      <select name="destinationCountry" id="destinationCountry" required>
+        <option value=""></option>
+        {
+          dataCountries.map((country) => (
+            <option
+              value={country}
+              selected={country === destinationCountry ? true : false}
+            >
+              {country}
+            </option>
+          ))
+        }
+      </select>
+    </div>
+    <div class="form-group">
+      <Button className="button-primary" text={buttonText} />
+    </div>
+  </form>
+</search>
+
+<style>
+  search {
+    /* box-shadow: var(--box-shadow); */
+    /* padding: 2rem; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    h2 {
+      text-align: center;
+    }
+
+    & form {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      gap: 2rem;
+
+      & h2 {
+        text-align: center;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        /* flex-grow: 1; */
+
+        & select {
+          padding: 0.4rem;
+          border: none;
+          border-bottom: 2px solid var(--border-focus);
+          font-size: var(--p);
+          text-transform: capitalize;
+
+          /* & option {
+            font-size: medium;
+          } */
+        }
+
+        /* TODO: Fix the select focus and focus-within */
+
+        & select:focus,
+        label:focus {
+          border-bottom: 2px solid var(--border-focus);
+        }
+
+        & select:invalid {
+          border-bottom: 2px solid gray;
+        }
+
+        & select > option {
+          border-bottom: 2px solid var(--border-focus);
+        }
+
+        & select option[value=""],
+        select option:not([value]) {
+          border-bottom: 2px solid gray;
+        }
+      }
+    }
+  }
+</style>

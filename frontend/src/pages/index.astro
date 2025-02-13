@@ -1,0 +1,55 @@
+---
+import FormVisaSearch from '@features/search/components/FormVisaSearch/FormVisaSearch.astro';
+import Layout from '@layouts/Layout.astro';
+
+const isMVP = true 
+---
+
+<Layout title="Home">
+	<div class="home-container">
+		<section class="section-hero">
+			<h1>Get all the visa information you need</h1>
+			<h2>Finding the right visa for your trip shouldn't be hard.</h2>
+			<FormVisaSearch title={null} buttonText='Find your visa' />
+		</section>
+		{isMVP ? null : <section>
+			<h2>Urgent Warnings</h2>
+			<p>Congo closes borders because of Mpox</p>
+			<p>Ukraine closes its borders to tourists</p>
+			<p>Terrorist attack in London - here's what to do if you've been affected</p>
+		</section>
+		<section>
+			<h2>Visa Updates</h2>
+			<p>Chinese create new visa for workers</p>
+			<p>Australia needs more working holiday workers</p>
+			<p>Its easier to get visas for digital nomads in Portugal</p>
+		</section>
+		<section>
+			<h2>Latest News</h2>
+			<p>Top passports</p>
+			<p>Argentina closes its embassy in Denmark</p>
+			<p>Ukraine closes its borders to tourists</p>
+		</section>}
+	</div>
+</Layout>
+
+<style>
+	.home-container {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 15rem;
+		padding-top: 5rem;
+		
+		section {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 3rem;
+		}
+	}
+</style>

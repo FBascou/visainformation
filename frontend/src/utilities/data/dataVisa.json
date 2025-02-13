@@ -1,0 +1,77 @@
+{
+  "visaType": "",
+  "code": "",
+  "description": "",
+  "duration": "",
+  "validity": "",
+  "numberEntries": [{ "id": 0, "type": "single" }],
+  "countryExemptionList": [],
+  "countryRejectionList": [],
+  "visaApplicationUrl": "",
+  "requirements": {
+    "documents": {
+      "description": "",
+      "applicationForm": true,
+      "applicationFormUrl": "",
+      "documentType": "",
+      "documentValidity": "",
+      "documentPhotocopyQuantity": 1,
+      "other": ""
+    },
+    "fees": { "feeLocal": 0, "feeUsd": 0 },
+    "finance": {
+      "description": "",
+      "bankStatement": true,
+      "amountLocal": 0,
+      "amountUsd": 0,
+      "employmentProof": "",
+      "other": ""
+    },
+    "photo": {
+      "description": "",
+      "photoType": "Biometric/Passport",
+      "size": { "sizeMm": "47mm x 36mm", "sizeInches": "1.85in x 1.42in" },
+      "quantity": 1,
+      "backgroundColor": "White/Blue",
+      "other": ""
+    },
+    "health": {
+      "description": "",
+      "insurance": false,
+      "insuranceCoverageAmountLocal": 0,
+      "insuranceCoverageAmountUsd": 0,
+      "report": false,
+      "vaccines": {},
+      "other": ""
+    },
+    "transport": { "description": "", "returnTicket": true, "other": "" },
+    "accomodation": {
+      "description": "",
+      "accomodationProof": true,
+      "invitationLetter": true,
+      "other": ""
+    },
+    "legal": {
+      "criminalReport": false,
+      "legalGuardianConsent": "",
+      "other": ""
+    },
+    "extraRequirements": [""]
+  },
+  "process": {
+    "description": "",
+    "method": {},
+    "interview": true,
+    "duration": "",
+    "appointment": "",
+    "steps": {}
+  },
+
+  "statistics": {
+    "rejectionRateAverage": 0,
+    "rejectionRatePerCountry": [],
+    "waitingDaysAverage": 0,
+    "waitingDaysAveragePerCountry": []
+  },
+  "news": {}
+}

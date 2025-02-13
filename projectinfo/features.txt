@@ -1,0 +1,109 @@
+Visa Section
+
+*** Will be on the MVP
+
+-- Scrap all websites to get data
+-- find all visa websites and put them on a list
+-- search for dropdowns, ul or ol
+
+Routes: 
++ Home ***
++ Find Your Visa ***
++ Visa Information by Country ***
++ Visa Map
++ Visa Agencies
++ About
+
+Features: 
++ Visa Check, Do I need a Visa for X country? (Landing Page)  ***
++ Country List  ***
++ Search/Filter  ***
+-- Type, Length, Price Local, Price USD, Requirements, Exempted Countries, Invitation Letter
++ Visa Map
+-- Use Search/Filter for map as well
+-- Select a country and see the other colored countries where you need a visa and its duration (darker the color the more length) or the same for rejection rate by country
+--- When hovering other countries on the map, it gives info like price, length, type, etc.
+--- Gives you a table with map list regarding visa country information
++ Visa news and visa news per country
++ Visa Comparison Table (Compare passports between various countries)  ***
++ Visa comparison Table (Compare visas between each other)
++ Allow agencies to put their ads on the website by country
++ Scrape URLs to get information of visas
+-- To check if there was an update on one of the visa pages:
+--- Store/save all the body content and compare it to the next day/week/whatever.
+--- If it changes, then store/save the new body content
+--- Keep checking automatically
++ When selecting a country, show a list of that country's consulate/embassies with contact info, address, visa application link, etc.
++ Multiple languages
++ Instructions on how to complete the visa
++ Checklist of documents (create a section in the countries/country/visa) to do and download a checklist
++ In which countries can I go with my passport? Show a list of countries 
+- filter per continent, travelReason
+- deep filter per bankstatement, healthinsurance, flighttickets, etc.
+
+Home/Hero Section:
++ Title
++ Subtitle: 
+-- Up to date visa information so you don't have to spend hours researching it. 
+-- We do the research so you don't have to.
++ Find Your Visa
+-- Your passport ***
+-- Your destination ***
+-- Travel reason (Work/Work&Holiday, Study, Tourism, All, Other), will group different visas into relevant categories
+
+Find Your Visa: 
++ Title ***
++ User input (User Passport, Destination, Reason) ***
++ List of visas from Travel Reason (Tourism: No Visa, Short Stay, Long Stay) + info ***
++ Relevant Agencies
+
+
+Countries:
++ Title ***
++ Country List search bar ***
++ Filters ***
++ Visa type cards with expanding arrow 
+
+
+About:
++ Title
++ Why should you trust us? The information that you find here are compiled from all the countries' official/government websites.
+
+
+Design: 
++ Minimal
++ Light & Dark Theme
+https://www.figma.com/file/mleXAv6EH9BVBCGCmMwQlI/Visas?node-id=0%3A1
+
+VISA FAQS:
+What are visas? 
+Visa Interview Questions? 
+What do they ask in these questions?
+Etc.
+
+Extra Data (For JSON): 
+- Visa Process Length
+- Enter with ID (or with Passport Only?)
+- Visa Term: Short vs Long Term
+- Visa on Arrival
+- Visa Application Page URL
+- Visa Overstay Problems
+
+Show information and requirements for people who already have visas 
+and need to renew or something like that:
+Deportation
+Which date they have to leave or renew (date calulator)
+
+
+LEGAL WARNINGS:
+The website information or tips does not give any guarantee that you will get the visa or not
+This is only for general information
+Interviews and visa processes may vary from case to case
+
+Resources/Inspiration: 
+https://www.passportindex.org/
+https://visaguide.world/
+https://www.flypgs.com/en/visa-free-countries
+https://www.ivisa.com/
+https://www.visahq.com
+https://visadb.io/search/visas/all/Turkey/Anywhere

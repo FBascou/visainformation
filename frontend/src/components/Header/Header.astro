@@ -1,0 +1,77 @@
+---
+type NavbarListType = {
+  link: string;
+  name: string;
+};
+
+const navbarList: NavbarListType[] = [
+  { link: "search", name: "Find your visa" },
+  { link: "countries", name: "Countries" },
+  { link: "faq", name: "F.A.Q." },
+  { link: "glossary", name: "Glossary" },
+];
+---
+
+<header>
+  <a href="/" class="logo-container">
+    <img src="" alt="" />
+    <p>VisaInfo</p>
+  </a>
+  <nav>
+    <menu>
+      {
+        navbarList.map((item) => (
+          <li>
+            <a href={`/${item.link}`}>{item.name}</a>
+          </li>
+        ))
+      }
+    </menu>
+  </nav>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    padding-block: 1.2rem;
+    padding-inline: var(--p-layout-inline);
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--bg-tertiary);
+
+    .logo-container {
+      display: flex;
+      color: var(--clr-accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      menu {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3rem;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li a {
+          color: var(--clr-primary);
+
+          &:hover {
+            color: var(--clr-tertiary);
+          }
+        }
+      }
+    }
+  }
+</style>

@@ -1,0 +1,87 @@
+---
+import { getDestinationCountry, getVisaList } from "@features/search/queries/queries";
+import FormCountrySearch from "@features/countries/components/FormCountrySearch.astro";
+import OverviewList from "@features/search/components/OverviewList/OverviewList.astro";
+import TableAccordion from "@features/search/components/TableAccordion/TableAccordion.astro";
+import Layout from "@layouts/Layout.astro";
+
+
+const { searchParams } = Astro.url;
+const destinationCountry = searchParams.get('destinationCountry') || "";
+// Capitalization will be a problem for countries with more than 1 word
+const capitalizedDestinationCountry = destinationCountry[0]?.toUpperCase() + destinationCountry.slice(1).toLowerCase()
+const tableHeaders = ["Visa", "Visa Code", "Duration", "Number of Entries", "Visa Type", "Requirements"]
+
+
+const country = await getDestinationCountry(destinationCountry)
+const visaList = await getVisaList(destinationCountry)
+
+const totalVisaNumber = visaList?.length
+// const countriesGroupedByType = Object.groupBy(visaList, ({ type }) => type)
+const totalWorkVisaNumber = visaList?.filter((visa) => visa.type === "Work").length
+const totalTourismVisaNumber = visaList?.filter((visa) => visa.type === "tourism").length
+---
+
+<Layout title={destinationCountry ? `Countries - ${capitalizedDestinationCountry}` : "Countries"}>
+    <div class="countries-container">
+      <h1>Countries</h1>
+      <section>
+        <FormCountrySearch title={null} destinationCountry={destinationCountry} buttonText='Search country' />
+      </section>
+      {
+      destinationCountry 
+        ? <section>
+          <h2>General Info</h2>
+          {
+          visaList === undefined ? 
+          <p>No stats found</p> : 
+          <OverviewList list={[]} />
+          <div class="country-stats">
+            <p>Total visas: {totalVisaNumber}</p>
+            Top 3 most popular visa types.
+            <p>Total work visas: {totalWorkVisaNumber}</p>
+            <p>Total tourism visas: {totalTourismVisaNumber}</p>
+            <p>Total Work and Holiday visas: {totalTourismVisaNumber}</p>
+          </div>
+          }
+        </section>
+        <section>
+          <h2>Visas</h2>
+          <form>
+          </form>
+          <TableAccordion tableHeaders={tableHeaders} tableBody={visaList} />
+        </section> 
+        : null 
+      }
+    </div>
+</Layout>
+
+<style>
+  .countries-container {
+		width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    text-transform: capitalize;
+
+    section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem
+    }
+
+    .country-stats {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 2rem
+    }
+
+  }
+</style>

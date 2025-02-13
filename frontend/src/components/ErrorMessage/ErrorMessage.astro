@@ -1,0 +1,17 @@
+---
+interface Props {
+  errors?: string[];
+}
+
+const { errors } = Astro.props;
+---
+
+<!-- {hasFieldErrors(errors) && <ErrorMessage errors={errors.fieldErrors?.travelReason} />} -->{
+  !errors?.length ? null : (
+    <div class="error-message-container">
+      {errors?.map((error) => (
+        <p class="message-error">{error}</p>
+      ))}
+    </div>
+  )
+}

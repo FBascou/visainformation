@@ -1,0 +1,182 @@
+---
+interface Props {
+  tableHeaders: string[];
+  tableBody: any[];
+  passportCountry?: string;
+}
+
+const { tableHeaders, tableBody, passportCountry } = Astro.props;
+const { pathname, searchParams } = Astro.url;
+
+const tableColumns = `${tableHeaders.length ?? 0}`;
+
+const appendUrlSearchParam = (visaId: number) => {
+  const newSearchParams = new URLSearchParams(searchParams);
+  newSearchParams.set("visaId", String(visaId));
+  return `${pathname}?${newSearchParams.toString()}`;
+};
+
+const getSpecialColumnData = (VisaCountryExemptionList: any, Visa: any) => {
+  const specialColumn = tableHeaders[4];
+  if (specialColumn === "Visa Required") {
+    return !VisaCountryExemptionList?.name.includes(passportCountry ?? "") ? "Yes" : "No";
+  } else if (specialColumn === "Visa Type") {
+    return Visa?.type;
+  } else {
+    return null;
+  }
+};
+---
+
+<div class="table-accordion-container">
+  <div class="table-accordion-header">
+    {tableHeaders.map((header) => (header === null ? null : <p>{header}</p>))}
+  </div>
+  <div class="table-accordion-body">
+    {
+      tableBody === undefined || tableBody.length === 0 ? (
+        <p class="error-no-data-found">No visas found</p>
+      ) : (
+        tableBody?.map(({ Visa, VisaCountryExemptionList, VisaRequirement }) => (
+          <details name="visa">
+            <summary>
+              <p>{Visa?.name}</p>
+              <p>{Visa?.code}</p>
+              <p>{Visa?.duration}</p>
+              <p>{Visa?.numberOfEntries}</p>
+              <p>{getSpecialColumnData(VisaCountryExemptionList, Visa)}</p>
+              <p>Show ▼</p>
+            </summary>
+            <div class="table-accordion-overview">
+              <h4>Overview</h4>
+              <p>Visa: {Visa?.name}</p>
+              <p>Duration: {Visa?.duration}</p>
+              <p>Validity: {Visa?.validity}</p>
+              <p>Number of Entries: {Visa?.numberOfEntries}</p>
+              <p>Description: {Visa?.description}</p>
+              {/* {getSpecialColumnData(Visa)} */}
+              {tableHeaders[4] !== "Visa Required" ? null : (
+                <p>
+                  Visa Required:{" "}
+                  {!Visa?.countryExemptionList?.includes(passportCountry ?? "") ? "Yes" : "No"}
+                </p>
+              )}
+            </div>
+            <div class="table-accordion-requirements">
+              <h4>Requirements</h4>
+              <ul>
+                <li>Application Form: {VisaRequirement?.applicationFormName}</li>
+                <li>Application Form Code: {VisaRequirement?.applicationFormCode}</li>
+                <li>Application URL: {VisaRequirement?.applicationFormUrl}</li>
+                <li>Document Required: {VisaRequirement?.documentType}</li>
+                <li>Document validity: {VisaRequirement?.documentValidity}</li>
+                <li>Document Photocopies: {VisaRequirement?.documentPhotocopyQuantity}</li>
+                <li>
+                  Visa Price ({VisaRequirement?.feeLocalCurrency}): {VisaRequirement?.feeLocal}
+                </li>
+                <li>Visa Price (USD): {VisaRequirement?.feeUsd}</li>
+              </ul>
+            </div>
+            <div class="table-accordion-more">
+              <a href={appendUrlSearchParam(Visa?.id)}>More Information</a>
+            </div>
+          </details>
+        ))
+      )
+    }
+  </div>
+</div>
+
+<style define:vars={{ tableColumns }}>
+  .table-accordion-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+
+    .table-accordion-header,
+    .table-accordion-body {
+      width: 100%;
+    }
+
+    .table-accordion-header {
+      display: grid;
+      grid-template-columns: repeat(var(--tableColumns), 1fr);
+      gap: 1rem;
+      list-style: none;
+      box-shadow: var(--box-shadow);
+      padding: 1rem 2rem;
+      font-weight: 600;
+    }
+
+    .table-accordion-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+
+      .error-no-data-found {
+        text-align: center;
+        text-transform: none;
+      }
+
+      & details {
+        width: 100%;
+        box-shadow: var(--box-shadow);
+        padding: 1rem 2rem;
+
+        & summary {
+          cursor: pointer;
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(var(--tableColumns), 1fr);
+          gap: 1rem;
+          list-style: none;
+          text-transform: capitalize;
+        }
+      }
+
+      & details:hover summary {
+        color: var(--clr-accent);
+        transition: 0.8s;
+      }
+    }
+
+    .table-accordion-overview,
+    .table-accordion-requirements,
+    .table-accordion-more {
+      border-top: 1px solid var(--border-primary);
+      margin-top: 1rem;
+      padding-block: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      & h4 {
+        font-weight: 600;
+      }
+
+      & ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        & li {
+          list-style: disc;
+          list-style-position: inside;
+        }
+      }
+
+      & a {
+        box-shadow: var(--box-shadow);
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        background-color: var(--clr-accent);
+        color: var(--clr-secondary);
+        font-weight: 600;
+      }
+    }
+  }
+</style>

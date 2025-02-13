@@ -1,0 +1,35 @@
+---
+import OverviewItem from "../OverviewItem/OverviewItem.astro";
+
+type OverviewItemType = {
+  label: string;
+  value: undefined | string | number;
+};
+
+type Props = {
+  list: OverviewItemType[];
+};
+
+const { list } = Astro.props;
+---
+
+<section>
+  <ul class="overview-container">
+    {
+      list.map((item) =>
+        item.value === undefined ? null : <OverviewItem label={item.label} value={item.value} />
+      )
+    }
+  </ul>
+</section>
+
+<style>
+  .overview-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    text-transform: capitalize;
+  }
+</style>
