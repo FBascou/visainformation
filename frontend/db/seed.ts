@@ -10,10 +10,6 @@ import {
 import countryList from "./data/countries/index";
 import { VisaAU } from "./data/countries/australia";
 
-// https://en.wikipedia.org/wiki/ISO_3166
-
-// https://astro.build/db/seed
-// use Batch Api
 export default async function seed() {
   await db.insert(Country).values(countryList);
 

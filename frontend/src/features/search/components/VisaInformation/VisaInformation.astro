@@ -41,7 +41,6 @@ const importantMessage = `<p>
 
 <section class="visa-information-container">
   <h2>Visa {visa?.Visa.name}</h2>
-  <!-- <h2>Visa Overview: {visa?.Visa.name}</h2> -->
   {!visa?.Visa.description ? null : <p>{visa.Visa.description}</p>}
   <CardImportantMessage message={importantMessage} />
   <OverviewList list={overviewList} />
@@ -70,30 +69,7 @@ const importantMessage = `<p>
   <section>
     <h2>Contact</h2>
     <h3>In {passportCountry}</h3>
-    <!-- <address>
-      <a href="mailto:jim@example.com">jim@example.com</a><br />
-      <a href="tel:+14155550132">+1 (415) 555‑0132</a>
-    </address> -->
-
-    <!-- <ul>
-    {filteredCountry?.diplomaticMission?.passportCountry?.map((mission) => 
-    <li>{mission.name}</li>          
-    <li>Address: {mission.fullAddress}</li>          
-    <li>Phone: {mission.phoneMain}</li>          
-    <li>Emergency Phone:{mission.phoneEmergency}</li>          
-    <li>Email: {mission.email}</li>     
-  )}
-  </ul> -->
     <h3>In {destinationCountry}</h3>
-    <!-- <ul>
-  {filteredCountry?.diplomaticMission?.destinationCountry?.map((mission) => 
-    <li>{mission.name}</li>          
-    <li>Address: {mission.fullAddress}</li>          
-    <li>Phone: {mission.phoneMain}</li>          
-    <li>Emergency Phone:{mission.phoneEmergency}</li>          
-    <li>Email: {mission.email}</li>     
-  )}
-  </ul> -->
   </section>
   <section><h2>News</h2></section>
 </section>

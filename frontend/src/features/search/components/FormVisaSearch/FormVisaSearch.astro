@@ -2,7 +2,6 @@
 import Button from "@components/Button/Button.astro";
 import dataCountries from "@utilities/data/dataCountries.json";
 import dataTravelReasons from "@utilities/data/dataTravelReasons.json";
-//https://stackoverflow.com/questions/22292822/how-to-style-select-dropdown-only-when-value-is-empty
 
 interface Props {
   title: null | string;
@@ -13,12 +12,9 @@ interface Props {
 }
 
 const { title, passportCountry, destinationCountry, travelReason, buttonText } = Astro.props;
-
-// In the future, compare country codes instead of names "AU", "AR", etc
 ---
 
 <search>
-  <!-- Remove the title?? -->
   {title === null ? null : <h2>{title}</h2>}
   <form action={"/search"}>
     <div class="form-group">
@@ -144,7 +140,6 @@ const { title, passportCountry, destinationCountry, travelReason, buttonText } =
 </script>
 
 <style>
-  /* user-valid https://www.youtube.com/watch?v=awNYtIAu6pI */
   search {
     width: 100%;
     display: flex;
@@ -173,8 +168,8 @@ const { title, passportCountry, destinationCountry, travelReason, buttonText } =
         flex-direction: column;
         gap: 0.3rem;
         height: 100%;
-        max-width: 100%; /* fix this? */
-        flex: 1 auto; /* fix this? */
+        max-width: 100%;
+        flex: 1 auto;
 
         & select {
           padding: 0.4rem;
@@ -204,20 +199,6 @@ const { title, passportCountry, destinationCountry, travelReason, buttonText } =
         & select:focus label {
           color: var(--clr-primary);
         }
-
-        /* 
-        & select:invalid {
-          border-bottom: 2px solid gray;
-        }
-
-        & select > option {
-          border-bottom: 2px solid var(--border-focus);
-        }
-
-        & select option[value=""],
-        select option:not([value]) {
-          border-bottom: 2px solid gray;
-        } */
       }
     }
   }

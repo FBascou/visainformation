@@ -8,7 +8,6 @@ import Layout from "@layouts/Layout.astro";
 
 const { searchParams } = Astro.url;
 const destinationCountry = searchParams.get('destinationCountry') || "";
-// Capitalization will be a problem for countries with more than 1 word
 const capitalizedDestinationCountry = destinationCountry[0]?.toUpperCase() + destinationCountry.slice(1).toLowerCase()
 const tableHeaders = ["Visa", "Visa Code", "Duration", "Number of Entries", "Visa Type", "Requirements"]
 
@@ -17,7 +16,6 @@ const country = await getDestinationCountry(destinationCountry)
 const visaList = await getVisaList(destinationCountry)
 
 const totalVisaNumber = visaList?.length
-// const countriesGroupedByType = Object.groupBy(visaList, ({ type }) => type)
 const totalWorkVisaNumber = visaList?.filter((visa) => visa.type === "Work").length
 const totalTourismVisaNumber = visaList?.filter((visa) => visa.type === "tourism").length
 ---

@@ -63,9 +63,6 @@ export const getFilteredDestinationCountryVisaList = async (
     .from(Visa)
     .innerJoin(Country, and(eq(Country.name, destinationCountry), eq(Country.id, Visa.countryId)))
     .where(eq(Visa.type, visaType));
-  // .where(eq(Visa.duration, duration))
-  // .where(eq(Visa.numberOfEntries, numberOfEntries))
-  // .where(eq(Visa.validity, validity));
 };
 
 export const getPopularVisaTypesByDestinationCountry = async (destinationCountry: string) => {
@@ -73,5 +70,4 @@ export const getPopularVisaTypesByDestinationCountry = async (destinationCountry
     .select()
     .from(Visa)
     .innerJoin(Country, and(eq(Country.name, destinationCountry), eq(Country.id, Visa.countryId)));
-  // add here
 };
